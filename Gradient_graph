@@ -1,0 +1,29 @@
+import numpy as np
+import matplotlib.pylab as plt
+
+#原函数
+def function_1(x):
+    return 0.01*x**2 + 0.1*x 
+
+# 求梯度
+def f_x(x):
+    return 0.02*x + 0.1
+    
+# 根据梯度 画图   
+def tangent_line1(x):
+    d = f_x(x)
+    print("d1",d)
+    y= 0.01*x**2+0.1*x - d*x  # 0.01x^2+0.1x = dx+b  其中b 就是截距
+    return lambda t: d*t +y   # 匿名函数
+     
+x = np.arange(0.0, 20.0, 0.1)
+y = function_1(x)
+plt.plot(x, y)
+
+
+f_xx = tangent_line1(function_1,5)
+yfxx = f_xx(x)
+plt.plot(x,yfxx)
+
+
+plt.show()
